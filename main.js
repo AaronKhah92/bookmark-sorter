@@ -6,45 +6,29 @@ let links = [
   "https://dev.to/pofl/how-to-work-with-git-an-overview-of-git-workflows-1icb"
 ];
 
-function getUrl(userWord = "git") {
-  /* //console.log(linkUrl);
-    linkUrl.match(/\b(\w+)'?(\w+)?\b/g);
-  console.log(wordsInUrl);
-
-  wordFound = wordsInUrl.includes(userWord);
-  console.log(wordFound);
-
-  
-  console.log(word); */
+function getUrl(userWord = "css") {
+  let matchedUrl = new Set();
   var urls = links.map(function(url) {
     let wordsInUrl = url.match(/\b(\w+)'?(\w+)?\b/g);
-    console.log(wordsInUrl);
-    wordFound = wordsInUrl.includes(userWord);
-    console.log(wordFound);
+    // console.log(wordsInUrl);
+    let wordFound = wordsInUrl.includes(userWord);
+    //console.log(wordFound);
 
     if (wordFound === true) {
       var wordt = wordsInUrl.reduce(function(acc, word) {
-        /*       indWord = wordsInUrl.indexOf(word);
-        catArr = wordsInUrl.slice(2, indWord);
-        console.log(catArr);
-        console.log(indWord); */
-
         if (word === userWord) {
           acc[word] = typeof acc[word] === "number" ? acc[word] + 1 : 1;
-          /*  return word === userWord; */
-          //console.log(word);
         }
         return acc;
       }, {});
-      console.log(wordt);
+    }
+
+    if (typeof wordt !== "undefined") {
+      matchedUrl.add(url);
     }
   });
+  const matchedUrlArr = Array.from(matchedUrl);
+  console.log(matchedUrlArr);
+  return matchedUrlArr;
 }
 getUrl();
-
-/* function mode(arr){
-    return arr.sort((a,b) =>
-          arr.filter(v => v===a).length
-        - arr.filter(v => v===b).length
-    ).pop();
-} */
